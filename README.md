@@ -1,2 +1,2 @@
 # pgadmin
-PGAdmin for Kubernetes
+pgAdmin for Kubernetes
