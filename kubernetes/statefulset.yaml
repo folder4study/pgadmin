@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pgadmin
+  namespace: folder4study
+  labels:
+    app: pgadmin
+    version: latest
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: pgadmin
+      labels:
+        app: pgadmin
+        version: latest
+    spec:
+      containers:
+        - name: pgadmin
+          image: dpage/pgadmin4
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - name: port
+              containerPort: 80
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: pgadmin
+          volumeMounts:
+            - mountPath: /var/lib/pgadmin
+              name: pv
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+      volumes:
+        - name: pv
+          persistentVolumeClaim:
+            claimName: pgadmin
+  selector:
+    matchLabels:
+      app: pgadmin
+  serviceName: pgadmin

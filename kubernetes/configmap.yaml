@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pgadmin
+  namespace: folder4study
+  labels:
+    app: pgadmin
+    version: latest
+data:
+  PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+  PGADMIN_DEFAULT_PASSWORD: admin
+  PGADMIN_CONFIG_SERVER_MODE: 'False'
